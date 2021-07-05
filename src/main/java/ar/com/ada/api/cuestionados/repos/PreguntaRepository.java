@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import ar.com.ada.api.cuestionados.entities.Pregunta;
 
 @Repository
-public interface PreguntaRepository extends JpaRepository<Categoria, Integer> {
+public interface PreguntaRepository extends JpaRepository<Pregunta, Integer> {
     
 }
 

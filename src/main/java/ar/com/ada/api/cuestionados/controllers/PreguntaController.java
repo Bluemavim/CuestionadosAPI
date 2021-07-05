@@ -40,7 +40,7 @@ public class PreguntaController {
         Pregunta pregunta = service.crearPregunta(preguntaNueva.enunciado, preguntaNueva.categoriaId, preguntaNueva.opciones);
         respuesta.isOk = true;
         respuesta.id = pregunta.getPreguntaId();
-        respuesta.message = "La pregunta fue creada con exito";
+        respuesta.message = "La pregunta fue creada con éxito";
 
         return ResponseEntity.ok(preguntaNueva);
 
