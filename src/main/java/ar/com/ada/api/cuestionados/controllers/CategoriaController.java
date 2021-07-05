@@ -15,6 +15,33 @@ public class CategoriaController {
     @Autowired
     private CategoriaService service;
 
+    //GET /categorias
+    @GetMapping("/categorias") //hacer el mapping
+    public ResponseEntity<List<Categoria>> traerCategorias() { //return Response Entity
+        return ResponseEntity.ok(service.traerCategorias()); //return entity con el valor esperado
+    }
+
+    //GET Categoría por Id
+    @GetMapping("/categoria/{id}")
+    public ResponseEntity<Categoria> traerCategoriaPorId(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.buscarCategoria(id));
+    }
+
+    @PostMapping(value = "/categoria")
+    public ResponseEntity<?> crearCategoria(@RequestBody Categoria categoria) {
+        GenericResponse r = new GenericResponse();
+
+        if (service.crearCategoria(categoria)) {
+            r.id = categoria.getCategoriaId();
+            r.isOk = true;
+            r.message = "Categoria creada con exito";
+            return ResponseEntity.ok(r);
+        } else {
+            r.isOk = false;
+            r.message = "Esta categoria ya esta creada";
+            return ResponseEntity.badRequest().body(r);
+        }
+
 
     //Crear una categoría   
     @PostMapping("/categorias") 
@@ -30,13 +57,6 @@ public class CategoriaController {
         respuesta.id = categoria.getCategoriaId();
         respuesta.message = "La categoría fue creada con éxito";
         return ResponseEntity.ok(respuesta);
-    }
-
-
-    //Traer todas las categorías
-    @GetMapping("/categorias")
-    public ResponseEntity<List<Categoria>> traerCategorias (){
-        return ResponseEntity.ok(service.traerCategorias());
     }
 
     @DeleteMapping("/categorias{id}")

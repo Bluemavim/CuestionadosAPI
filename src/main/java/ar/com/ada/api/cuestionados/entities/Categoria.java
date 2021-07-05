@@ -6,9 +6,8 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-@Table (name= "categorias")
+@Table(name = "categoria")
 public class Categoria {
 
     @Id
@@ -16,10 +15,8 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer categoriaId;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "descripcion")
     private String descripcion;
 
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -58,7 +55,8 @@ public class Categoria {
         this.preguntas = preguntas;
     }
 
-
-
+    public void agregarPregunta(Pregunta pregunta){
+        this.preguntas.add(pregunta);
+    }
 
 }

@@ -1,23 +1,30 @@
 package ar.com.ada.api.cuestionados.entities;
- 
+
 import javax.persistence.*;
- 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table (name= "respuesta")
+@Table(name="respuesta")
 public class Respuesta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "respuesta_id")
+    @Column(name="respuesta_id")
     private Integer respuestaId;
 
-    @Column(name = "enunciado")
     private String texto;
 
-    //@Column(name = "pregunta_id")
-    //private Integer preguntaId;
+    @Column(name="es_correcta")
+    private boolean esCorrecta;
+
+    @ManyToOne
+    @JoinColumn(name="pregunta_id",referencedColumnName = "pregunta_id")
+    @JsonIgnore
+    private Pregunta pregunta;
 
 
+   
     public Integer getRespuestaId() {
         return respuestaId;
     }
@@ -42,6 +49,14 @@ public class Respuesta {
         this.esCorrecta = esCorrecta;
     }
 
-    private boolean esCorrecta;
+    public Pregunta getPregunta() {
+        return pregunta;
+    }
 
+    public void setPregunta(Pregunta pregunta) {
+        this.pregunta = pregunta;
+        this.pregunta.agregarRespuesta(this);//relacion bidireccional
+    }
+
+    
 }

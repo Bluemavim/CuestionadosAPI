@@ -1,11 +1,14 @@
-
 package ar.com.ada.api.cuestionados.models.request;
 
-import java.math.BigDecimal;
+import java.util.List;
+
+import ar.com.ada.api.cuestionados.entities.Respuesta;
 
 public class InfoPreguntaNueva {
-    public String nombre;
-    public Integer edad;
-    public BigDecimal sueldo;
-    public Integer categoriaId;
+    
+  public String enunciado;
+
+  public List<Respuesta> opciones;
+
+  public Integer categoriaId;
 }
